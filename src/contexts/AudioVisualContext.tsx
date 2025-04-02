@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, useEffect, useRef } from 'react';
 import * as Tone from 'tone';
 
@@ -173,9 +172,14 @@ export const AudioVisualProvider: React.FC<{ children: React.ReactNode }> = ({ c
       }, '4m').start(0);
       
       // Start patterns
-      bassPattern.start(0).interval = '2n');
-      melodyPattern.start('1m').interval = '4n');
-      hiHatPattern.start(0).interval = '8n');
+      bassPattern.start(0);
+      bassPattern.interval = '2n';
+      
+      melodyPattern.start('1m');
+      melodyPattern.interval = '4n';
+      
+      hiHatPattern.start(0);
+      hiHatPattern.interval = '8n';
       
       Tone.Transport.start();
       setIsPlaying(true);
