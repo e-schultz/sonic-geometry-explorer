@@ -71,6 +71,28 @@ export default {
 					pink: "#D946EF",
 					accent: "#F97316",
 					text: "#F1F0FB"
+				},
+				// Solarized theme colors
+				solarized: {
+					// Light theme
+					'base3': '#fdf6e3',  // background (light)
+					'base2': '#eee8d5',
+					'base1': '#93a1a1',
+					'base0': '#839496',
+					// Dark theme
+					'base00': '#657b83',
+					'base01': '#586e75',
+					'base02': '#073642',
+					'base03': '#002b36', // background (dark)
+					// Accent colors (same in both themes)
+					'yellow': '#b58900',
+					'orange': '#cb4b16',
+					'red': '#dc322f',
+					'magenta': '#d33682',
+					'violet': '#6c71c4',
+					'blue': '#268bd2',
+					'cyan': '#2aa198',
+					'green': '#859900',
 				}
 			},
 			borderRadius: {
