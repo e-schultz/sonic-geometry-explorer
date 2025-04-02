@@ -5,6 +5,7 @@ import { ControlPanel } from '@/components/ControlPanel';
 import { AudioVisualProvider } from '@/contexts/AudioVisualContext';
 import { ThemePanel } from '@/components/ThemePanel';
 import { useTheme } from '@/hooks/useTheme';
+import { ParameterAutomationDemo } from '@/components/ParameterAutomationDemo';
 
 const Index = () => {
   const { theme, toggleTheme } = useTheme();
@@ -29,6 +30,11 @@ const Index = () => {
         
         {/* Control Panel (now a collapsible panel) */}
         <ControlPanel />
+        
+        {/* Parameter Automation Demo */}
+        <div className="absolute bottom-4 right-4 z-20 w-80">
+          <ParameterAutomationDemo />
+        </div>
       </div>
     </AudioVisualProvider>
   );
