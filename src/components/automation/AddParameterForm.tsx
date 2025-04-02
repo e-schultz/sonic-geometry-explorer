@@ -38,9 +38,12 @@ export const AddParameterForm: React.FC<{
   });
   
   const onSubmit = (data: FormData) => {
+    // Explicitly ensure all required properties are present
     addParameter({
-      ...data,
-      automationEnabled: false,
+      name: data.name,           // Required: explicitly passed
+      value: data.value,         // Required: explicitly passed
+      type: data.type,           // Required: explicitly passed
+      automationEnabled: false,  // Required: default value
       automationConfig: {
         pattern: 'sine',
         minValue: data.value * 0.5,
