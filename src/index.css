@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +90,44 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-visualizer-bg text-visualizer-text;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .glassmorphic {
+    @apply bg-black/30 backdrop-blur-md border border-white/10 rounded-lg;
+  }
+  
+  .visualizer-canvas {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-visualizer-purple via-visualizer-blue to-visualizer-pink;
+  }
+  
+  .control-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: theme('colors.visualizer.purple');
+    cursor: pointer;
+  }
+  
+  .control-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: theme('colors.visualizer.purple');
+    cursor: pointer;
   }
 }
