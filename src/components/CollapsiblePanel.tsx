@@ -8,13 +8,13 @@ import { useAudioVisual } from '@/contexts/AudioVisualContext';
 interface CollapsiblePanelProps {
   collapsed: boolean;
   onToggleCollapse: () => void;
-  children: React.ReactNode; // Added children prop to the interface
+  children: React.ReactNode;
 }
 
 export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
   collapsed,
   onToggleCollapse,
-  children, // Added children to destructuring
+  children,
 }) => {
   const { isPlaying, togglePlay } = useAudioVisual();
 
@@ -22,11 +22,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
     <div className="fixed bottom-0 left-0 w-full z-10">
       <Collapsible
         open={!collapsed}
-        onOpenChange={(open) => {
-          if (open !== collapsed) {
-            onToggleCollapse();
-          }
-        }}
+        onOpenChange={() => onToggleCollapse()}
       >
         {/* Controls that are always visible */}
         <div className="relative">
@@ -66,7 +62,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
         </div>
         
         <CollapsibleContent className="glassmorphic border-t border-visualizer-purple/30 pb-8">
-          {children} {/* Render children instead of hardcoded content */}
+          {children}
         </CollapsibleContent>
       </Collapsible>
     </div>
