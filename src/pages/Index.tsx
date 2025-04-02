@@ -18,13 +18,8 @@ const Index = () => {
           </h1>
         </div>
         
-        {/* Control Panel */}
+        {/* Control Panel (now a slide-up drawer) */}
         <ControlPanel />
-        
-        {/* Instructions */}
-        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 glassmorphic px-6 py-3 z-10 text-center">
-          <p className="opacity-80 text-sm">Click the play button to start the audio-visual experience</p>
-        </div>
       </div>
     </AudioVisualProvider>
   );

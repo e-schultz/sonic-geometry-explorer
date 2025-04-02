@@ -1,46 +1,61 @@
-import React, { useRef, useMemo } from 'react';
+
+import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useAudioVisual } from '@/contexts/AudioVisualContext';
 import * as THREE from 'three';
+import { useAudioVisual } from '@/contexts/AudioVisualContext';
+
+const NUM_BARS = 64;
+const BAR_WIDTH = 0.1;
+const MAX_HEIGHT = 5;
+const SPACING = 0.15;
 
 export const Bars = () => {
-  const { audioData, isPlaying } = useAudioVisual();
-  const groupRef = useRef<THREE.Group>(null);
+  const { audioData } = useAudioVisual();
+  const meshRefs = useRef<THREE.Mesh[]>([]);
   
-  const barCount = 32;
-  const bars = useMemo(() => 
-    Array.from({ length: barCount }).map((_, i) => ({
-      position: [(i - barCount/2 + 0.5) * 0.3, 0, 0],
-      color: new THREE.Color().setHSL(i / barCount * 0.6 + 0.6, 0.8, 0.5)
-    })),
-  []);
+  const bars = useMemo(() => {
+    const width = NUM_BARS * (BAR_WIDTH + SPACING) - SPACING;
+    const positions = [];
+    const geometries = [];
+    
+    for (let i = 0; i < NUM_BARS; i++) {
+      const x = i * (BAR_WIDTH + SPACING) - width / 2;
+      positions.push(x);
+      
+      const geometry = new THREE.BoxGeometry(BAR_WIDTH, 0.1, BAR_WIDTH);
+      geometry.translate(0, 0.05, 0);
+      geometries.push(geometry);
+    }
+    
+    return { positions, geometries };
+  }, []);
   
   useFrame(() => {
-    if (!groupRef.current || !isPlaying || !audioData || audioData.length === 0) return;
+    if (!audioData || !audioData.length) return;
     
-    groupRef.current.children.forEach((child, i) => {
-      // Map each bar to a frequency in the audio data
-      const freqIndex = Math.floor((i / barCount) * Math.min(audioData.length, 64));
-      const audioValue = Math.abs(audioData[freqIndex] || 0);
-      
-      // Scale the bar height based on audio intensity
-      const scaleY = Math.max(0.1, audioValue * 10);
-      child.scale.y = scaleY;
-      
-      // Update position to keep the bar grounded
-      child.position.y = scaleY / 2;
-    });
+    for (let i = 0; i < NUM_BARS; i++) {
+      if (meshRefs.current[i]) {
+        const height = Math.max(0.1, audioData[i] * MAX_HEIGHT);
+        meshRefs.current[i].scale.y = height;
+        meshRefs.current[i].position.y = height / 2;
+      }
+    }
   });
   
   return (
-    <group ref={groupRef}>
-      {bars.map((bar, i) => (
-        <mesh key={i} position={bar.position}>
-          <boxGeometry args={[0.2, 1, 0.2]} />
+    <group>
+      {bars.positions.map((x, i) => (
+        <mesh
+          key={i}
+          ref={el => el && (meshRefs.current[i] = el)}
+          position={[x, 0, 0]}
+          geometry={bars.geometries[i]}
+        >
           <meshStandardMaterial 
-            color={bar.color} 
-            emissive={bar.color}
-            emissiveIntensity={0.3}
+            color={new THREE.Color(0.6, 0.2, 0.8)}
+            emissive={new THREE.Color(0.2, 0.05, 0.4)}
+            roughness={0.2}
+            metalness={0.8}
           />
         </mesh>
       ))}
