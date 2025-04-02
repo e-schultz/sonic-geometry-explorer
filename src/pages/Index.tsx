@@ -27,7 +27,7 @@ const Index = () => {
           <ThemePanel theme={theme} onThemeChange={() => toggleTheme()} className="glassmorphic" />
         </div>
         
-        {/* Control Panel (now a slide-up drawer) */}
+        {/* Control Panel (now a collapsible panel) */}
         <ControlPanel />
       </div>
     </AudioVisualProvider>
