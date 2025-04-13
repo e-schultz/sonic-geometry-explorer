@@ -4,6 +4,30 @@
 
 **URL**: https://lovable.dev/projects/d4f543f3-41ea-4950-8962-de5c2afe26f0
 
+## Features
+
+### Parameter Automation
+
+The application now supports a robust parameter automation system with the following capabilities:
+
+- **Parameter Types**: 
+  - BPM (Beats Per Minute)
+  - Bass Intensity
+  - Visualizer Property
+
+- **Automation Patterns**:
+  - Linear
+  - Exponential
+  - Sine Wave
+  - Random
+
+- **Key Functionalities**:
+  - Add new automation parameters
+  - Edit existing parameters
+  - Delete parameters
+  - Configure automation patterns
+  - Real-time parameter value modifications
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
@@ -52,13 +76,14 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with:
 
 - Vite
 - TypeScript
 - React
 - shadcn-ui
 - Tailwind CSS
+- Zod (for form validation)
 
 ## How can I deploy this project?
 
